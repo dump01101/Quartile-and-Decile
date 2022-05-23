@@ -1,0 +1,46 @@
+import methods
+
+
+def main():
+    choice = eval(input(f"Quartiles or Deciles. Input the number only.\n1. Quartiles\n2. Deciles\n> "))
+
+    if choice == 1:
+        method = methods.quartile_method()
+
+        x = methods.quartile_elements()
+
+        if len(x) > 2:
+            if method == 1:
+                process = methods.quartile_process(x)
+                print(process)
+            elif method == 2:
+                process = methods.quartile_process1(x)
+                print(process)
+            elif method == 3:
+                process = methods.quartile_process2(x)
+                print(process)
+            else:
+                print("Input the number that is present in the method")
+        else:
+            print("3 elements and up are only acceptable")
+    elif choice == 2:
+        method = methods.decile_method()
+
+        x = methods.decile_elements()
+
+        if len(x) > 2:
+            if method == 1:
+                print()
+                methods.decile_unknownMethod(x)
+            elif method == 2:
+                print()
+                methods.decile_Linear_Interpolation(x)
+            else:
+                print("Input the number that is present in the method")
+        else:
+            print("3 elements and up are only acceptable")
+    else:
+        print("Input the number that is only present")
+
+if __name__ == '__main__':
+    main()
