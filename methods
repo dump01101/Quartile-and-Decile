@@ -1,0 +1,162 @@
+def quartile_method():
+    method = eval(input(f"What method do you want? Input the number only.\n1. Moore & McCabe method\n2. Mendenhall and Sincich method\n3. Linear Interpolation\n> "))
+
+    return method
+
+
+def quartile_elements():
+    n = eval(input("How many given elements are there? "))
+
+    x = []
+
+    for i in range(1, n + 1):
+        num = eval(input(f"Element {i}: "))
+        x.append(num)
+
+    x.sort()
+    return x
+
+
+def quartile_process(x):
+    if len(x) % 2 == 0:
+        new_X = x[:(len(x) // 2) - 1]
+        new_Y = x[(len(x) // 2) + 1:]
+
+        a = x[(len(x) // 2) - 1]
+        b = x[len(x) // 2]
+        median = (a + b) / 2
+        if len(new_X) % 2 == 0 and len(new_Y) % 2 == 0:
+            lower_X = new_X[len(new_X) // 2]
+            lower_Y = new_X[(len(new_X) // 2) - 1]
+            lower_quartile = (lower_X + lower_Y) / 2
+
+            upper_X = new_Y[len(new_Y) // 2]
+            upper_Y = new_Y[(len(new_Y) // 2) - 1]
+            upper_quartile = (upper_X + upper_Y) / 2
+
+            return f"\nLower quartile: {lower_quartile}\nMedian: {median}\nUpper quartile: {upper_quartile}\nInterquartile: {upper_quartile - lower_quartile}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {lower_quartile}.\nQ2: Therefore, the median of the given data is equal to {median}.\nQ3: Therefore, 75% of the given data are less than or equal to {upper_quartile}."
+        else:
+            lower_quartile = new_X[len(new_X) // 2]
+            upper_quartile = new_Y[len(new_Y) // 2]
+
+            return f"\nLower quartile: {lower_quartile}\nMedian: {median}\nUpper quartile: {upper_quartile}\nInterquartile: {upper_quartile - lower_quartile}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {lower_quartile}.\nQ2: Therefore, the median of the given data is equal to {median}.\nQ3: Therefore, 75% of the given data are less than or equal to {upper_quartile}."
+    else:
+        new_X = x[:len(x) // 2]
+        new_Y = x[(len(x) // 2) + 1:]
+        median = x[len(x) // 2]
+        if len(new_X) % 2 == 0 and len(new_Y) % 2 == 0:
+            lower_X = new_X[len(new_X) // 2]
+            lower_Y = new_X[(len(new_X) // 2) - 1]
+            lower_quartile = (lower_X + lower_Y) / 2
+
+            upper_X = new_Y[len(new_Y) // 2]
+            upper_Y = new_Y[(len(new_Y) // 2) - 1]
+            upper_quartile = (upper_X + upper_Y) / 2
+
+            return f"\nLower quartile: {lower_quartile}\nMedian: {median}\nUpper quartile: {upper_quartile}\nInterquartile: {upper_quartile - lower_quartile}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {lower_quartile}.\nQ2: Therefore, the median of the given data is equal to {median}.\nQ3: Therefore, 75% of the given data are less than or equal to {upper_quartile}."
+        else:
+            lower_quartile = new_X[len(new_X) // 2]
+            upper_quartile = new_Y[len(new_Y) // 2]
+
+            return f"\nLower quartile: {lower_quartile}\nMedian: {median}\nUpper quartile: {upper_quartile}\nInterquartile: {upper_quartile - lower_quartile}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {lower_quartile}.\nQ2: Therefore, the median of the given data is equal to {median}.\nQ3: Therefore, 75% of the given data are less than or equal to {upper_quartile}."
+
+
+def quartile_process1(x):
+    lower_quartile = 0.25 * (len(x) + 1)
+    upper_quartile = 0.75 * (len(x) + 1)
+    if lower_quartile - int(lower_quartile) >= 0.50 and upper_quartile - int(upper_quartile) >= 0.55:
+        lower_quartile = int(lower_quartile) + 1
+        upper_quartile = int(upper_quartile) + 1
+
+        return f"\nLower quartile: {x[lower_quartile - 1]}\nUpper quartile: {x[upper_quartile - 1]}\nInterquartile: {x[upper_quartile - 1] - x[lower_quartile - 1]}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {x[lower_quartile - 1]}.\nQ3: Therefore, 75% of the given data are less than or equal to {x[upper_quartile - 1]}."
+    elif lower_quartile - int(lower_quartile) >= 0.50 and upper_quartile - int(upper_quartile) < 0.55:
+        lower_quartile = int(lower_quartile) + 1
+        upper_quartile = int(upper_quartile)
+
+        return f"\nLower quartile: {x[lower_quartile - 1]}\nUpper quartile: {x[upper_quartile - 1]}\nInterquartile: {x[upper_quartile - 1] - x[lower_quartile - 1]}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {x[lower_quartile - 1]}.\nQ3: Therefore, 75% of the given data are less than or equal to {x[upper_quartile - 1]}."
+    elif lower_quartile - int(lower_quartile) < 0.50 and upper_quartile - int(upper_quartile) >= 0.55:
+        lower_quartile = int(lower_quartile)
+        upper_quartile = int(upper_quartile) + 1
+
+        return f"\nLower quartile: {x[lower_quartile - 1]}\nUpper quartile: {x[upper_quartile - 1]}\nInterquartile: {x[upper_quartile - 1] - x[lower_quartile - 1]}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {x[lower_quartile - 1]}.\nQ3: Therefore, 75% of the given data are less than or equal to {x[upper_quartile - 1]}."
+    else:
+        lower_quartile = int(lower_quartile)
+        upper_quartile = int(upper_quartile)
+
+        return f"\nLower quartile: {x[lower_quartile - 1]}\nUpper quartile: {x[upper_quartile - 1]}\nInterquartile: {x[upper_quartile - 1] - x[lower_quartile - 1]}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {x[lower_quartile - 1]}.\nQ3: Therefore, 75% of the given data are less than or equal to {x[upper_quartile - 1]}."
+
+
+def quartile_process2(x):    
+    lower_quartile = 0.25 * (len(x) + 1)
+    a = x[int(lower_quartile)]
+    b = x[int(lower_quartile) - 1]
+    c = a - b
+    decimal = lower_quartile - int(lower_quartile)
+    q1 = c * decimal
+    first_quartile = q1 + b
+
+    upper_quartile = 0.75 * (len(x) + 1)
+    i = x[int(upper_quartile)]
+    j = x[int(upper_quartile) - 1]
+    k = i - j
+    decimal = upper_quartile - int(upper_quartile)
+    q3 = k * decimal
+    upper_quartile = q3 + j
+
+    return f"\nFirst quartile: {first_quartile}\nUpper quartile: {upper_quartile}\nInterquartile: {upper_quartile - lower_quartile}\n\nInterpretation:\nQ1: Therefore, 25% of the given data are less than or equal to {first_quartile}.\nQ3: Therefore, 75% of the given data are less than or equal to {upper_quartile}."
+
+
+def decile_method():
+    method = eval(input(f"What method do you want? Input the number only.\n1. Unknown method\n2. Linear Interpolation\n> "))
+    
+    return method
+
+
+def decile_elements():
+    n = eval(input("How many given elements are there? "))
+
+    x = []
+
+    for i in range(1, n + 1):
+        num = eval(input(f"Element {i}: "))
+        x.append(num)
+
+    x.sort()
+    return x
+
+
+def decile_unknownMethod(x):
+    n = eval(input("How many deciles do you want to find?\n> "))
+
+    y = []
+
+    for i in range(1, n + 1):
+        dec = eval(input(f"{i}: "))
+        y.append(dec)
+
+    for i in y:
+        yn = (i * (len(x) + 1)) / 10
+        x1 = x[int(yn) - 1]
+
+        print(f"D{i}: {x1}. Therefore, {i * 10}% of the given data are less than or equal to {x1}.")
+
+
+def decile_Linear_Interpolation(x):
+    n = eval(input("How many deciles do you want to find?\n> "))
+
+    y = []
+
+    for i in range(1, n + 1):
+        dec = eval(input(f"{i}: "))
+        y.append(dec)
+
+    for i in y:
+        yn = (i * (len(x) + 1)) / 10
+        x1 = x[int(yn)]
+        x2 = x[int(yn) - 1]
+        step_3 = x1 - x2
+        decimal = yn - int(yn)
+        multiply = step_3 * decimal
+        last = multiply + x2
+
+        print(f"D{i}: {last}. Therefore, {i * 10}% of the given data are less than or equal to {last}.")
